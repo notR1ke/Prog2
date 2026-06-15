@@ -1,0 +1,657 @@
+Exercicio 025
+
+#include <stdio.h>
+
+
+int triangle(int a, int b, int c){
+    if (((a+b)>c) && ((a+c)>b) && ((b+c)>a)) {
+        return 1;
+    } else {
+        return 0;
+    } 
+}
+
+Exercicio 026
+
+#include <stdio.h>
+
+int count(int x, int a[], int n){
+  int p = 0;
+  for (int i = 0; i < n; i++){
+        if (a[i]==x){
+            p++;
+        }
+    }
+    return p;
+}
+
+Exercicio 027
+
+#include <stdio.h>
+
+int max_diff(int a[], int n){
+    int dif=0;
+    for (int i=0; i<n-1; i++){
+        if (a[i]<0 && a[i+1]<0){
+            if (-a[i]+a[i+1]>dif){
+                dif=-a[i]+a[i+1];
+            }
+            if (-a[i+1]+a[i]>dif){
+                dif=-a[i+1]+a[i];
+            }
+        }
+        if (a[i]>0 && a[i+1]<0){
+            if (a[i]-a[i+1]>dif){
+                dif=a[i]-a[i+1];
+            }
+        }
+        if (a[i]<0 && a[i+1]>0){
+            if (-a[i]+a[i+1]>dif){
+                dif=-a[i]+a[i+1];
+            }
+        }
+        if (a[i]>0 && a[i+1]>0){
+            if (a[i]-a[i+1]>dif){
+                dif=a[i]-a[i+1];
+            }
+            if (a[i+1]-a[i]>dif){
+                dif=a[i+1]-a[i];
+            }
+        }
+    }
+    return dif;
+}
+
+Exercicio 028
+
+#include <stdio.h>
+
+void reverse(int a[], int n){
+    int b[n-1];
+    for (int i=0; i<n; i++){
+        b[i]=a[n-i-1];
+    }
+    for (int i=0; i<n; i++){
+        a[i]=b[i];
+    }
+}
+
+
+Exercicio 029
+
+#include <stdio.h>
+
+void sort(int a[], int n){
+    // utilizei AI para me indicar qual é o algoritmo mais simples e mais eficas para fazer sorting da array
+    //Algoritmo utilizado é o bubble sort
+    for (int i=0; i<n-1; i++){
+        for (int j=0; j<n-i-1; j++){
+            if(a[j]>a[j+1]){
+                int temp = a[j];
+                a[j] = a[j+1];
+                a[j+1] = temp;
+            }
+        }
+    }
+}
+
+Exercicio 030
+
+// #include <stdio.h>
+
+void shift(int a[], int n, int k){
+    int b[n];
+    if (k>0){
+        for (int i=0; i<n;i++){
+        if (k>i){
+            b[i]=a[(n-k)+i];
+        } else{
+            b[i]=a[i-k];
+            }
+        }
+        for (int i=0; i<n;i++){
+            a[i]=b[i];
+        }
+    } else{
+        for (int i=0; i<n;i++){
+        if ((n+k)>i){
+            b[i]=a[i-k];
+        } else{
+            b[i]=a[i-(n+k)];
+            }
+        }
+        for (int i=0; i<n;i++){
+            a[i]=b[i];
+        }
+    }
+    
+}
+
+Exercicio 031
+
+int search(int x, int a[], int n){
+    int y=-1;
+    for (int i=0; i<n; i++){
+        if (x==a[i]){
+            y=i;
+            break;
+        }
+    }
+    return y;
+}
+
+Exercicio 033
+
+int digits(char str[]) {
+    int count = 0;
+    int i = 0;
+
+    while (str[i] != '\0') {
+        if (str[i] >= '0' && str[i] <= '9') {
+            count++;
+        }
+        i++;
+    }
+
+    return count;
+}
+
+Exercicio 034
+
+void caesar_cipher(char str[], int k){
+    int i=0;
+    while (str[i]!='\0'){
+        if (str[i] >= 'a' && str[i]<='z'){
+            int valor=str[i]+k;
+            while (valor > 'z'){
+                valor-=26;
+            }
+            str[i]=valor;
+        }
+        i++;
+    }
+}
+
+Exercicio 035
+
+void remove_all(char ch, char str[]){
+	char word[100];
+	int n=strlen(str);
+	int x=0;
+	for (int i=0; i<n; i++){
+		if (ch==str[i]){
+			x++;
+			continue;
+		} else{
+			word[i-x]=str[i];
+		}
+	}
+
+	strcpy(str,word);
+}
+
+Exercicio 036
+
+int substring(char key[], char str[]){
+    int i=0;
+    int j=0;
+    int valor=0;
+    int len=0;
+    while(str[j]!='\0'){
+            if (str[j]==key[i]){
+                i++;
+                j++;
+            } else {
+                j++;
+            }
+        }
+    if (key[i]=='\0'){
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+Exercicio 037
+
+int main(void){
+    int n;
+    scanf("%d", &n);
+    char str[100][100];
+    int k;
+    for (int i=0; i<n; i++) {
+        scanf("%s", str[i]);
+    }
+    int contador=0;
+    for (int i=0; i<n; i++){
+        int repetida=0;
+        for (int j=0; j<i; j++){
+            if (strcmp(str[i], str[j]) == 0){
+                repetida=1;
+                break;
+            }
+        }
+        if (repetida==0)
+        {
+            contador++;
+        }
+    }
+    printf("%d\n", contador);
+    return 0;
+}
+
+Exercicio 038
+
+int occurrences(char key[], char str[]){
+    int tamanho_str=strlen(str);
+    int tamanho_key=strlen(key);
+    int contador=0;
+    for (int i=0; i<= tamanho_str-tamanho_key; i++){
+        int flag=0;
+        for (int j=0; j<tamanho_key; j++){
+            if (key[j]!=str[i+j]){
+                flag=1;
+            }
+        }
+        if (flag==0){
+            contador++;
+        }
+    }
+    return contador;
+}
+
+Exercicio 039
+
+int main(void){
+    char word[10000];
+    scanf("%s", word);
+    int k;
+    scanf("%d", &k);
+    printf("%s\n", word);
+    for (int i=0; i<k; i++){
+        int len=strlen(word);
+        char word2[10000];
+        int at=0;
+        for (int j=0; j<len; j++){
+            if (word[j]=='A'){
+                word2[at]='A';
+                word2[at+1]='B';
+                at+=2;
+            } else if (word[j]=='B')
+            {
+                word2[at]='A';
+                at++;
+            }
+            
+        }
+        strcpy(word,word2);
+        printf("%s\n", word);
+    }
+
+    return 0;
+}
+
+Exercicio 041
+
+int palindrome(char s[], int start, int end){
+    if (start>=end){
+        return 1;
+    }
+    if (s[start] != s[end]){
+        return 0;
+    }
+
+    return palindrome(s, start+1, end-1);
+}
+
+Exercicio 042
+
+#include <stdio.h>
+#include <string.h>
+
+int conta_colonia(char grelha[100][100], int r, int c, int linha, int coluna){
+    if (linha < 0 || linha >= r || coluna < 0 || coluna >= c){
+        return 0;
+    }
+
+    if (grelha[linha][coluna] != '#'){
+        return 0;
+    }
+
+    grelha[linha][coluna]='.';
+
+    int tamanho=1;
+
+    tamanho += conta_colonia(grelha, r, c, linha - 1, coluna);     // Cima
+    tamanho += conta_colonia(grelha, r, c, linha + 1, coluna);     // Baixo
+    tamanho += conta_colonia(grelha, r, c, linha, coluna - 1);     // Esquerda
+    tamanho += conta_colonia(grelha, r, c, linha, coluna + 1);     // Direita
+    tamanho += conta_colonia(grelha, r, c, linha - 1, coluna - 1); // Diagonal Cima-Esq
+    tamanho += conta_colonia(grelha, r, c, linha - 1, coluna + 1); // Diagonal Cima-Dir
+    tamanho += conta_colonia(grelha, r, c, linha + 1, coluna - 1); // Diagonal Baixo-Esq
+    tamanho += conta_colonia(grelha, r, c, linha + 1, coluna + 1); // Diagonal Baixo-Dir
+    
+    return tamanho;
+
+}
+
+int main(void){
+    int n;
+    char grelha[100][100];
+    scanf("%d", &n);
+    for (int i=0; i<n; i++){
+        int r, c;
+        scanf("%d %d", &r, &c);
+        for (int j=0; j<r; j++){
+            scanf("%s", grelha[j]);
+            }
+        int maior_colonia=0;
+        for (int linha=0; linha<r; linha++){
+            for (int coluna=0; coluna<c; coluna++){
+                int tamanho=conta_colonia(grelha, r, c, linha, coluna);
+                if (tamanho>maior_colonia){
+                    maior_colonia=tamanho;
+            }
+            }
+        }
+        printf("%d\n", maior_colonia);
+    }
+}
+
+Exercicio 043
+
+#include <stdio.h>
+#include <string.h>
+
+int racheal(char snake[100][100], int r, int c, int linha, int coluna){
+    if (linha < 0 || coluna < 0 || linha >= r || coluna >= c){
+        return 0;
+    } else if (snake[linha][coluna]=='S'){
+        return 1;
+    } else if (snake[linha][coluna]=='#'){
+        return 0;
+    }
+
+    snake[linha][coluna]='#';
+
+    if (racheal(snake, r, c, linha+1, coluna)==1){
+        return 1;
+    }
+    if (racheal(snake, r, c, linha, coluna+1)==1){
+        return 1;
+    }
+    if (racheal(snake, r, c, linha-1, coluna)==1){
+        return 1;
+    }
+    if (racheal(snake, r, c, linha, coluna-1)==1){
+        return 1;
+    }
+
+    return 0;
+}
+
+int main(void){
+    int n;
+    int r,c;
+    char snake[100][100];
+    scanf("%d", &n);
+    for (int i=0; i<n; i++){
+        scanf("%d %d", &r, &c);
+        for (int j=0; j<r; j++){
+            scanf("%s", snake[j]);
+        }
+        int inicial_coluna, inicial_linha;
+        for (int linha=0; linha<r; linha++){
+            for (int coluna=0; coluna<c; coluna++){
+                if (snake[linha][coluna]=='R'){
+                    inicial_coluna=coluna;
+                    inicial_linha=linha;
+                }
+            }
+        }
+        int resultado = racheal(snake, r, c, inicial_linha, inicial_coluna);
+
+        if (resultado == 1)
+        {
+            printf("yes\n");
+        } else {
+            printf("no\n");
+        }
+    }
+}
+
+Exerciico 044
+
+#include <string.h>
+#include <stdio.h>
+
+void playlist(int musicas[], int i, int n, int d, int sum, int *best) {
+    if (i == n) {
+        if (sum > *best)
+            *best = sum;
+        return;
+    }
+
+    playlist(musicas, i+1, n, d, sum, best);
+
+    if (sum + musicas[i] <= d) {
+        playlist(musicas, i+1, n, d, sum + musicas[i], best);
+    }
+}
+
+int main(void) {
+    int d, n;
+    int best = 0;
+    int musicas[20];
+
+    scanf("%d %d", &d, &n);
+
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &musicas[i]);
+    }
+
+    playlist(musicas, 0, n, d, 0, &best);
+
+    printf("%d\n", best);
+    return 0;
+}
+
+Problema 1
+
+#include <stdio.h>
+
+int main(void){
+    int n;
+    scanf("%d", &n);
+    int s, m, h;
+    h=n/3600;
+    m=(n-h*3600)/60;
+    s=(n-h*3600-m*60);
+    printf("Time left: %d hours, %d minutes, %d seconds\n", h, m, s);
+    return 0;
+}
+
+Problema 2
+
+#include <stdio.h>
+
+int main(void){
+    int x,y;
+    scanf("%d %d", &x, &y);
+    if (x>0 && y>0){
+        printf("1st Quadrant\n");
+    } else if (x<0 && y>0)
+    {
+        printf("2nd Quadrant\n");
+    } else if (x<0 && y <0)
+    {
+        printf("3rd Quadrant\n");
+    } else if (x>0 && y<0){
+        printf("4th Quadrant\n");
+    }
+}
+
+Problema 3
+
+#include <stdio.h>
+
+// Função para desenhar o X de tamanho N
+void desenhar_x(int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            // Se estiver na diagonal principal OU na diagonal secundária
+            if (i == j || i + j == n - 1) {
+                printf("#");
+            } else {
+                printf(".");
+            }
+        }
+        // Quebra de linha no final de cada linha da grelha
+        printf("\n"); 
+    }
+}
+
+int main() {
+    int t;
+    
+    // Ler o número de casos de teste
+    if (scanf("%d", &t) == 1) {
+        // Para cada caso de teste...
+        for (int k = 0; k < t; k++) {
+            int n;
+            scanf("%d", &n); // Ler o tamanho do X
+            desenhar_x(n);   // Chamar a função para desenhar
+        }
+    }
+    
+    return 0;
+}
+
+Problema 4
+
+int amplitude(int a[], int n){
+    int max=-1000;
+    int min=1000;
+    for (int i=0; i<n; i++){
+        if (a[i]>max){
+            max=a[i];
+        } else if (a[i]<min){
+            min=a[i];
+        }
+    }
+    return (max-min);
+}
+
+Problema 5
+
+#include <ctype.h>
+
+int unique_letters (char str[]){
+    int n=strlen(str);
+    int contador;
+    for (int i=0; i<n; i++){
+        char letra_atual=str[i];
+        if (!isalpha(letra_atual)){
+            continue;
+        }
+        if (!(islower(letra_atual))){
+            letra_atual=tolower(letra_atual);
+        }
+
+        int repetida=0;
+        for (int j=0; j<i; j++){
+            char letra_anterior;
+            if (!(islower(letra_anterior))){
+                letra_anterior=tolower(letra_anterior);
+            }
+            if (letra_anterior==letra_atual){
+                repetida++;
+                break;
+            }
+        }
+        if (repetida==0){
+            contador++;
+        }
+    }
+    return contador;
+}
+
+
+
+Aqui tens o teu **Kit de Sobrevivência de Emergência**, só com a sintaxe pura:
+
+### 1. O Esqueleto (Começa sempre por aqui)
+```c
+#include <stdio.h>
+#include <string.h> // Se houver texto
+#include <ctype.h>  // Se precisares de isalpha(), tolower(), etc.
+
+int main(void) {
+    // Código entra aqui
+    return 0;
+}
+```
+
+### 2. Ler e Imprimir (A regra do `&`)
+* **Números (`int`):** TEM `&` no `scanf`
+  ```c
+  scanf("%d", &n);
+  printf("%d\n", n);
+  ```
+* **Palavras (`string`):** NÃO TEM `&` no `scanf`
+  ```c
+  scanf("%s", palavra);
+  printf("%s\n", palavra);
+  ```
+
+### 3. O Ciclo Universal (Para Arrays/Vetores)
+Se te derem uma lista de números `a` com tamanho `n`, escreve logo isto:
+```c
+for (int i = 0; i < n; i++) {
+    // Fazes qualquer coisa com a[i]
+}
+```
+
+### 4. O Ciclo das Strings (Para Textos)
+Se não souberes o tamanho da palavra, procura pelo `\0` (o fim da palavra):
+```c
+for (int i = 0; str[i] != '\0'; i++) {
+    // Fazes qualquer coisa com a letra str[i]
+}
+```
+
+### 5. O Duplo Ciclo (Para Matrizes e Grelhas)
+Sempre que o problema falar em "linhas", "colunas", "tabuleiro" ou "mapa":
+```c
+for (int linha = 0; linha < r; linha++) {
+    for (int coluna = 0; coluna < c; coluna++) {
+        // Fazes qualquer coisa com grelha[linha][coluna]
+    }
+}
+```
+
+### 6. Pílulas Salva-Vidas (Decora isto)
+* **Descobrir o Maior / Menor num array:**
+  Começa o maior com um número minúsculo, e o menor com um gigante.
+  ```c
+  int max = -999999;
+  int min = 999999;
+  ```
+* **Comparar Palavras:**
+  NÃO uses `==`. Usa `strcmp`. Se der `0`, são iguais.
+  ```c
+  if (strcmp(palavra1, palavra2) == 0) { ... }
+  ```
+* **É letra minúscula?**    
+  ```c
+  if (letra >= 'a' && letra <= 'z') { ... }
+  ```
+* **Recursividade (Função que se chama a si própria):**
+  Escreve **sempre** o `if` de paragem antes de qualquer outra coisa!
+  ```c
+  if (linha < 0 || coluna < 0 || linha >= r || coluna >= c) {
+      return 0; // Saiu da grelha, abortar!
+  }
+  ```
+
+---
